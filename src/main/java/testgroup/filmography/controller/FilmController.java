@@ -5,16 +5,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import testgroup.filmography.model.Film;
+import testgroup.filmography.service.FilmService;
+import testgroup.filmography.service.FilmServiceImpl;
+
+import java.util.List;
 
 @Controller
 public class FilmController {
-
+    private FilmService filmService = new FilmServiceImpl();
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView allFilms() {
         ModelAndView modelAndView = new ModelAndView();
+        List<Film> films = filmService.allFilms();
         modelAndView.setViewName("films");
-        modelAndView.addObject("film", film);
-        modelAndView.addObject("film2", film);
+        modelAndView.addObject("filmsList", films);
+
         return modelAndView;
     }
 
@@ -25,14 +30,6 @@ public class FilmController {
         return modelAndView;
     }
 
-    private static Film film;
 
-    static {
-        film = new Film();
-        film.setTitle("Inception");
-        film.setYear(2010);
-        film.setGenre("sci-fi000");
-        film.setWatched(true);
-    }
 
 }
