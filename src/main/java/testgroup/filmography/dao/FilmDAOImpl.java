@@ -20,6 +20,17 @@ public class FilmDAOImpl implements FilmDAO {
 
         // + film2, film3, film4, ...
     }
+    static {
+        Film film1 = new Film();
+        film1.setId(AUTO_ID.getAndIncrement());
+        film1.setTitle("Inception");
+        film1.setYear(2010);
+        film1.setGenre("sci-fi");
+        film1.setWatched(true);
+        films.put(film1.getId(), film1);
+
+        // + film2, film3, film4, ...
+    }
     @Override
     public List<Film> allFilms() {
         return new ArrayList<>(films.values());

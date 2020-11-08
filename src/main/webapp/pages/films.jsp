@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>FILMS</title>
@@ -25,9 +25,14 @@
             <td>${film.watched}</td>
             <td>
                 <a href="/edit/${film.id}">edit</a>
+                <a href="/delete/${film.id}">delete</a>
             </td>
         </tr>
     </c:forEach>
 </table>
+
+<h2>Add</h2>
+<c:url value="/add" var="add"/>
+<a href="${add}">Add new film</a>
 </body>
 </html>
