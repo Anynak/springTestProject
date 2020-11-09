@@ -18,7 +18,6 @@ public class FilmController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView allFilms() {
         ModelAndView modelAndView = new ModelAndView();
-
         List<Film> films = filmService.allFilms();
         modelAndView.setViewName("films");
         modelAndView.addObject("filmsList", films);
@@ -26,10 +25,17 @@ public class FilmController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    public ModelAndView test() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("test");
+
+        return modelAndView;
+    }
+
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public ModelAndView editFilm(@ModelAttribute("film") Film film) {
         ModelAndView modelAndView = new ModelAndView();
-        System.out.println(film);
         modelAndView.setViewName("redirect:/");
         filmService.edit(film);
         return modelAndView;
