@@ -1,5 +1,6 @@
 package testgroup.filmography.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,7 +15,8 @@ import java.util.List;
 
 @Controller
 public class FilmController {
-    private final FilmService filmService = new FilmServiceImpl();
+    @Autowired
+    private FilmService filmService;
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView allFilms() {
         ModelAndView modelAndView = new ModelAndView();
@@ -35,15 +37,24 @@ public class FilmController {
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public ModelAndView editFilm(@ModelAttribute("film") Film film) {
+        System.out.println(film);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("redirect:/");
         filmService.edit(film);
         return modelAndView;
     }
     @RequestMapping(value = "/add", method = RequestMethod.GET)
-    public ModelAndView addFilm() {
+    public ModelAndView addPage() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("add");
+        return modelAndView;
+    }
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public ModelAndView addFilm(@ModelAttribute("film") Film film) {
+        System.out.println(film);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("redirect:/");
+        filmService.add(film);
         return modelAndView;
     }
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)

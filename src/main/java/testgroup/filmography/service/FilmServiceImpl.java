@@ -1,13 +1,16 @@
 package testgroup.filmography.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import testgroup.filmography.dao.FilmDAO;
 import testgroup.filmography.dao.FilmDAOImpl;
 import testgroup.filmography.model.Film;
 
 import java.util.List;
-
+@Service
 public class FilmServiceImpl implements FilmService {
-    private FilmDAO filmDAO = new FilmDAOImpl();
+    @Autowired
+    private FilmDAO filmDAO;
 
     @Override
     public List<Film> allFilms() {
