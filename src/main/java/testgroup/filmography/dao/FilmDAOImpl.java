@@ -1,5 +1,8 @@
 package testgroup.filmography.dao;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import testgroup.filmography.model.Film;
 
@@ -7,36 +10,25 @@ import testgroup.filmography.model.Film;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
+
 @Repository
 public class FilmDAOImpl implements FilmDAO {
     private static final AtomicInteger AUTO_ID = new AtomicInteger(0);
     private static Map<Integer, Film> films = new HashMap<>();
 
-    static {
-        Film film1 = new Film();
-        film1.setId(AUTO_ID.getAndIncrement());
-        film1.setTitle("Inception");
-        film1.setYear(2010);
-        film1.setGenre("sci-fi");
-        film1.setWatched(true);
-        films.put(film1.getId(), film1);
+    private SessionFactory sessionFactory;
 
-        // + film2, film3, film4, ...
+    @Autowired
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
     }
-    static {
-        Film film1 = new Film();
-        film1.setId(AUTO_ID.getAndIncrement());
-        film1.setTitle("Inception");
-        film1.setYear(2010);
-        film1.setGenre("sci-fi");
-        film1.setWatched(true);
-        films.put(film1.getId(), film1);
 
-        // + film2, film3, film4, ...
-    }
+
+
     @Override
     public List<Film> allFilms() {
-        return new ArrayList<>(films.values());
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("from Film").list();
     }
 
     @Override
