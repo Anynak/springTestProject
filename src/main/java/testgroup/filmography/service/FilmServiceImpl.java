@@ -10,8 +10,8 @@ import testgroup.filmography.model.Film;
 import java.util.List;
 @Service
 public class FilmServiceImpl implements FilmService {
-    @Autowired
-    private FilmDAO filmDAO;
+    //@Autowired
+    private final FilmDAO filmDAO= new FilmDAOImpl();
 
     @Override
     @Transactional
