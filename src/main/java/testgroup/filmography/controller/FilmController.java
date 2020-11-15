@@ -25,12 +25,12 @@ public class FilmController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView allFilms() {
         ModelAndView modelAndView = new ModelAndView();
-        //List<Film> films = filmService.allFilms();
+        List<Film> films = filmService.allFilms();
         System.out.println(9999999);
         modelAndView.setViewName("films");
-        List<Film> films=new ArrayList<>();
-        films.add(new Film());
-        films.add(new Film());
+        //List<Film> films=new ArrayList<>();
+        //films.add(new Film());
+        //films.add(new Film());
         modelAndView.addObject("filmsList", films);
 
         return modelAndView;
