@@ -10,17 +10,27 @@ import org.springframework.web.servlet.ModelAndView;
 import testgroup.filmography.model.Film;
 import testgroup.filmography.service.FilmService;
 import testgroup.filmography.service.FilmServiceImpl;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class FilmController {
-    @Autowired
+
     private FilmService filmService;
+    @Autowired
+    public void setFilmService(FilmService filmService) {
+        this.filmService = filmService;
+    }
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView allFilms() {
         ModelAndView modelAndView = new ModelAndView();
-        List<Film> films = filmService.allFilms();
+        //List<Film> films = filmService.allFilms();
+        System.out.println(9999999);
         modelAndView.setViewName("films");
+        List<Film> films=new ArrayList<>();
+        films.add(new Film());
+        films.add(new Film());
         modelAndView.addObject("filmsList", films);
 
         return modelAndView;
@@ -28,6 +38,7 @@ public class FilmController {
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public ModelAndView test() {
+        System.out.println(888888);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("test");
 
